@@ -1,13 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'; 
+import { Entity, PrimaryGeneratedColumn, Column, EntityRepository } from 'typeorm'; 
 import { Repository } from 'typeorm';
 import { Product } from './schemas/product.schema'; // Import Product schema
 
 
 
-@Entity()
+@EntityRepository(Product)
 export class ProductRepository extends Repository<Product>{
 
-    finddAll(){}
+  async findAllProducts():Promise<Product[]>{
+      return this.find();
+  }
 
 
 }
