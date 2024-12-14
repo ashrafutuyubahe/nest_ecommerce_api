@@ -12,6 +12,17 @@ export class ProductService {
   ) {}
 
   async findAllProducts() {
-    return  this.productRepository.findAllProducts;
+    if(this.productRepository.findAllProducts!=null){
+      return  this.productRepository.findAllProducts
+    }
+    return [];
+  }
+
+
+  async addProduct(NewProduct:Product): Promise<Product>{
+
+    return this.productRepository.create(NewProduct);
+
+   
   }
 }
