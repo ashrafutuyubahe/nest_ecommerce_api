@@ -1,28 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './schemas/product.schema';
-import { ProductRepository } from './product.repository'; // Correct import
-
+import { ProductRepository } from './product.repository';
+import { CreateProductDto } from './product.dto';
 
 @Injectable()
 export class ProductService {
   constructor(
-    @InjectRepository(ProductRepository)  
-    private readonly productRepository: ProductRepository, 
+    @InjectRepository(ProductRepository)
+    private readonly productRepository: ProductRepository,
   ) {}
 
   async findAllProducts() {
-    if(this.productRepository.findAllProducts!=null){
-      return  this.productRepository.findAllProducts
+    if (this.productRepository.findAllProducts != null) {
+      return this.productRepository.findAllProducts;
     }
     return [];
   }
 
+  async addProduct(createProductDto: CreateProductDto) {
+    const createdProduct = this.productRepository.create(createProductDto);
+    console.log(createProductDto);
 
-  async addProduct(NewProduct:Product): Promise<Product>{
+    if (this.productRepository.save(createdProduct)) {
+      return this.productRepository.save(createdProduct);
+    }
 
-    return this.productRepository.create(NewProduct);
-
-   
+    return 'failed to add a product';
   }
 }

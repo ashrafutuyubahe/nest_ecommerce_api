@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Product } from './schemas/product.schema';
 import { ProductService } from './product.service';
+import { CreateProductDto } from './product.dto';
 
 @Controller('e-comerce_api/v1')
 export class ProductController {
@@ -22,9 +23,12 @@ export class ProductController {
 
     @Post("addProduct")
     async addProduct(
-    @Body() NewProduct:Product
+    @Body() createProductDto:CreateProductDto
     ){
-        return this.productService.addProduct(NewProduct);
+      this.productService.addProduct(createProductDto);
+
+
+
     }
 
 }
