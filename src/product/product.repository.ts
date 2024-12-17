@@ -4,7 +4,6 @@ import { Product } from './schemas/product.schema'; // Import Product schema
 
 
 
-@EntityRepository(Product)
 export class ProductRepository extends Repository<Product>{
 
   async findAllProducts():Promise<Product[]>{
