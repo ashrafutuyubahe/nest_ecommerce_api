@@ -11,13 +11,18 @@ export class ProductService {
     private readonly productRepository: ProductRepository,
   ) {}
 
+
   async findAllProducts() {
-    if (this.productRepository.findAllProducts != null) {
+   
       return this.productRepository.findAllProducts;
-    }
-    return [];
+    
   }
 
+  
+
+
+
+  
   async addProduct(createProductDto: CreateProductDto) {
     const createdProduct = this.productRepository.create(createProductDto);
     console.log(createProductDto);
